@@ -1,0 +1,46 @@
+session_name: grid
+windows:
+  - window_name: cryptact
+    layout: main-horizontal
+    panes:
+      - shell_command:
+          - cd ~/Code/cryptact
+          - pnpm containers:start && STRIPE_WEBHOOK_SECRET=$(stripe listen --print-secret) pnpm start:backend
+        focus: true
+        title: backend
+      - shell_command:
+          - cd ~/Code/cryptact
+          - pnpm start:client
+        title: client
+      - shell_command:
+          - cd ~/Code/cryptact
+          - sleep 5 && pnpm start:ledger
+        title: ledger
+  - window_name: paulette
+    layout: main-horizontal
+    panes:
+      - shell_command:
+          - cd ~/Code/paulette
+          - make docker/start && ENABLE_TXN_GENERATOR=1 make -C scheduler run
+        title: scheduler
+      - shell_command:
+          - cd ~/Code/paulette
+          - ENABLE_TXN_GENERATOR=1 make -C crawler run
+        title: crawler
+      - shell_command:
+          - cd ~/Code/paulette/position
+          - make run
+        title: position
+  - window_name: others
+    layout: main-horizontal
+    panes:
+      - shell_command:
+          - cd ~/Code/cryptact/packages/pafin.co
+          - make setup
+        title: pafin.co
+      - shell_command:
+          - cd ~/Code/cryptact/packages/cryptact.com
+          - pnpm dev
+        title: cryptact.com
+options:
+  status-right: "#T #[fg=green]| #[fg=colour136]%Y-%m-%d %H:%M #[fg=green]| #[fg=colour136]#(whoami)"
