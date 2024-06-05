@@ -16,6 +16,10 @@ windows:
           - cd ~/Code/cryptact
           - sleep 5 && pnpm start:ledger
         title: ledger
+      - shell_command:
+          - cd ~/Code/cryptact/packages/common
+          - pnpm tsc:watch
+        title: common
   - window_name: paulette
     layout: main-horizontal
     panes:
