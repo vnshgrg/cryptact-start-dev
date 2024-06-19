@@ -1,50 +1,57 @@
 session_name: grid
+start_directory: ~/Code
 windows:
   - window_name: cryptact
-    layout: main-horizontal
+    layout: tiled
+    shell_command_before:
+      - cd cryptact
     panes:
       - shell_command:
-          - cd ~/Code/cryptact
           - pnpm containers:start && STRIPE_WEBHOOK_SECRET=$(stripe listen --print-secret) pnpm start:backend
         focus: true
         title: backend
       - shell_command:
-          - cd ~/Code/cryptact
           - pnpm start:client
         title: client
       - shell_command:
-          - cd ~/Code/cryptact
           - sleep 5 && pnpm start:ledger
         title: ledger
       - shell_command:
-          - cd ~/Code/cryptact/packages/common
+          - cd packages/common
           - pnpm tsc:watch
         title: common
   - window_name: paulette
-    layout: main-horizontal
+    layout: tiled
+    shell_command_before:
+      - cd paulette
     panes:
       - shell_command:
-          - cd ~/Code/paulette
           - make docker/start && ENABLE_TXN_GENERATOR=1 make -C scheduler run
         title: scheduler
       - shell_command:
-          - cd ~/Code/paulette
           - ENABLE_TXN_GENERATOR=1 make -C crawler run
         title: crawler
       - shell_command:
-          - cd ~/Code/paulette/position
+          - cd position
           - make run
         title: position
   - window_name: others
-    layout: main-horizontal
+    layout: tiled
+    shell_command_before:
+      - cd cryptact
     panes:
       - shell_command:
-          - cd ~/Code/cryptact/packages/pafin.co
+          - cd packages/pafin.co
           - make setup
         title: pafin.co
       - shell_command:
-          - cd ~/Code/cryptact/packages/cryptact.com
+          - cd packages/cryptact.com
           - pnpm dev
         title: cryptact.com
+      - shell_command:
+          - cd packages/fintact
+          - pnpm dev
+        title: fintact
+      -
 options:
   status-right: "#T #[fg=green]| #[fg=colour136]%Y-%m-%d %H:%M #[fg=green]| #[fg=colour136]#(whoami)"
