@@ -35,6 +35,7 @@ windows:
           - cd position
           - make run
         title: position
+      -
   - window_name: others
     layout: tiled
     shell_command_before:
