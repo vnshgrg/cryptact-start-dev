@@ -27,7 +27,7 @@ windows:
       - cd paulette
     panes:
       - shell_command:
-          - make docker/start && ENABLE_TXN_GENERATOR=1 make -C scheduler run
+          - make docker/start && ENABLE_TXN_GENERATOR=1 && POSITIONS_BASE_URL=http://127.0.0.1:8082 make -C scheduler run
         title: scheduler
       - shell_command:
           - ENABLE_TXN_GENERATOR=1 make -C crawler run
