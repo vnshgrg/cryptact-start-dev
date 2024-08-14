@@ -5,7 +5,6 @@ windows:
     layout: tiled
     shell_command_before:
       - cd cryptact
-      - sleep 5
     panes:
       - shell_command:
           - pnpm containers:start && STRIPE_WEBHOOK_SECRET=$(stripe listen --print-secret) pnpm start:backend
@@ -44,15 +43,15 @@ windows:
     panes:
       - shell_command:
           - cd packages/pafin.co
-          - make setup
+          - pnpm dev
         title: pafin.co
       - shell_command:
           - cd packages/cryptact.com
-          - sleep 5 && pnpm dev
+          - pnpm dev
         title: cryptact.com
       - shell_command:
           - cd packages/fintact
-          - sleep 5 && pnpm dev
+          - pnpm dev
         title: fintact
       -
 options:
